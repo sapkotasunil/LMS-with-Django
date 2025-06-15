@@ -26,7 +26,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
     path("login",loginPage),
-    path("register",registerPage)
+    path("register",registerPage),
+    path("registerUser",registerUser)
 ]
 
 # To acess photos from local device and also change in setting

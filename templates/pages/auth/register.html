@@ -1,6 +1,6 @@
 {% extends 'layouts\main.html' %} {% block content %}
 <form
-  action="/loginUser"
+  action="/registerUser"
   method="post"
   class="max-w-sm mx-auto mt-10 p-6 bg-white rounded-2xl shadow-md space-y-5"
 >
@@ -12,6 +12,7 @@
     <label for="username" class="block text-gray-700 font-medium mb-1"
       >Username</label
     >
+
     <input
       type="text"
       name="userName"
@@ -19,6 +20,9 @@
       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
       placeholder="Enter your username"
     />
+    <h4 class="my-1 text-red-500 font-semibold">
+      {% if error %} {{error}} {% endif %}
+    </h4>
   </div>
   <div>
     <label for="email" class="block text-gray-700 font-medium mb-1"
@@ -26,7 +30,7 @@
     >
     <input
       type="text"
-      name="userName"
+      name="email"
       id="email"
       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
       placeholder="Enter your email"
@@ -58,11 +62,16 @@
     />
   </div>
 
+  <h4 class="my-1 text-red-500 font-semibold">
+    {% if messages %} {% for message in messages %} {{message}} {% endfor %}
+    {%endif %}
+  </h4>
+
   <button
     type="submit"
     class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-200"
   >
-    Login
+    Register
   </button>
 </form>
 
