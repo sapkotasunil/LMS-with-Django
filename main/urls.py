@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from main import settings
+from django.conf.urls.static import static
 
 from .views import * #to import all function default otherwise we use : from .views import index,loginPage,registerPage
 
@@ -26,3 +28,7 @@ urlpatterns = [
     path("login",loginPage),
     path("register",registerPage)
 ]
+
+# To acess photos from local device and also change in setting
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
