@@ -15,12 +15,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 from main import settings
 from django.conf.urls.static import static
-
+from user.views import *
 from .views import * #to import all function default otherwise we use : from .views import index,loginPage,registerPage
 
+employerUrlPattern=[
+    path ('dashboard',employerDashboard)
+]
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,7 +31,10 @@ urlpatterns = [
     path("login",loginPage),
     path("register",registerPage),
     path("registerUser",registerUser),
-    path("loginUser",loginUser)
+    path("loginUser",loginUser),
+    path('profile',profilePage),
+    path("employer/",include(employerUrlPattern)),
+    path("profile",profilePage)
 ]
 
 # To acess photos from local device and also change in setting
