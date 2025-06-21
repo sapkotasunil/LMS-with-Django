@@ -24,7 +24,11 @@ def registerUser(request):
         email=request.POST.get('email')
         password=request.POST.get('password')
         confirmPassword=request.POST.get('confirmPassword')
-        name=request.POST.get("name")
+        first_name=request.POST.get("first_name")
+        last_name=request.POST.get("last_name")
+        dob=request.POST.get("dob")
+        image=request.POST.get("image")
+        
         phone=request.POST.get("phone")
         adress=request.POST.get("adress")
         gender=request.POST.get("gender")
@@ -36,13 +40,16 @@ def registerUser(request):
         if User.objects.filter(email=email).exists():
             return render(request,"pages/auth/register.html",{"errors":{"email":"Email Already exists"}})
         
+        if len(phone)!=10:
+            return render(request,"pages/auth/register.html",{"errors":{"phone":"Enter 10 digit number only"}})
+        
         if password!=confirmPassword:
              return render(request,"pages/auth/register.html",{"errors":{"password":"Password doesnot match"}})
             
         if password==confirmPassword:
-            user =User.objects.create_user(username,email,password)
+            user =User.objects.create_user(username=username,email=email,password=password, first_name=first_name,last_name=last_name)
             user.save()
-            profile=Profile(user=user,name=name,adress=adress,phone=phone, gender=gender, role="employee")
+            profile=Profile(user=user,dob=dob,adress=adress,phone=phone, gender=gender, role="employee",image=image)
             profile.save()
             messages.success(request,"user created sucessfully")
             return redirect('/login')
@@ -68,5 +75,9 @@ def loginUser(request):
         else:
             
             return render (request,"pages/auth/login.html",{"errors":{"userName":"invalid user"}})
+        
 def employerDashboard(request):
     return render(request,'pages/employer/dashboard.html')
+
+def employeeDashboard(request):
+    return render(request,'pages/employee/dashboard.html')

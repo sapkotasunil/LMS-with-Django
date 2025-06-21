@@ -14,7 +14,7 @@ class Profile(models.Model):
         
         
     user=models.OneToOneField(User, on_delete=models.CASCADE)
-    name=models.CharField(blank=True,null=True)#name should be null 
+    dob=models.CharField(blank=True,null=True)#dob should be null 
     adress=models.CharField(blank=True,null=True, max_length=100)
     phone=models.CharField(blank=True, null=True ,max_length=10)
     role=models.CharField(choices=RoleOptions,default=RoleOptions.EMLOYEE,max_length=10)

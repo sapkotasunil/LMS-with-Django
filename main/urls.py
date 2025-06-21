@@ -25,6 +25,10 @@ employerUrlPattern=[
     path ('dashboard',employerDashboard)
 ]
 
+employeeUrlPattern=[
+    path("dashboard",employeeDashboard)
+]
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
@@ -34,7 +38,11 @@ urlpatterns = [
     path("loginUser",loginUser),
     path('profile',profilePage),
     path("employer/",include(employerUrlPattern)),
-    path("profile",profilePage)
+    path("employee/",include(employeeUrlPattern)),
+    path("profile",profilePage),
+    path('logout',logoutUSer),
+    path('edit',editUser),
+    path('update_edit',update_edit)
 ]
 
 # To acess photos from local device and also change in setting
