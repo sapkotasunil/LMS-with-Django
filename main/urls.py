@@ -20,13 +20,17 @@ from main import settings
 from django.conf.urls.static import static
 from user.views import *
 from .views import * #to import all function default otherwise we use : from .views import index,loginPage,registerPage
+from projects.views import *
 
 employerUrlPattern=[
-    path ('dashboard',employerDashboard)
+    path ('dashboard',employerDashboard),
+    path('projects',employerProjects),
+    path("register_project",register_project)
 ]
 
 employeeUrlPattern=[
-    path("dashboard",employeeDashboard)
+    path("dashboard",employeeDashboard),
+    path('projects',employeeProjects)
 ]
 
 urlpatterns = [
@@ -42,8 +46,10 @@ urlpatterns = [
     path("profile",profilePage),
     path('logout',logoutUSer),
     path('edit',editUser),
-    path('update_edit',update_edit)
-]
+    path('update_edit',update_edit),
+    path('dashboard',dashboard),
+    path("project",projects)
+] 
 
 # To acess photos from local device and also change in setting
 if settings.DEBUG:

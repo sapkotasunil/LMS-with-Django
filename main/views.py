@@ -4,9 +4,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
-
-
-
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     return render(request,"pages/index.html")
@@ -27,7 +25,7 @@ def registerUser(request):
         first_name=request.POST.get("first_name")
         last_name=request.POST.get("last_name")
         dob=request.POST.get("dob")
-        image=request.POST.get("image")
+        image=request.FILES.get("image")
         
         phone=request.POST.get("phone")
         adress=request.POST.get("adress")
@@ -53,8 +51,7 @@ def registerUser(request):
             profile.save()
             messages.success(request,"user created sucessfully")
             return redirect('/login')
-
-def loginUser(request):
+def loginUser(request):    
     if request.method=="POST":
         errors={}
         username=request.POST.get('userName')
@@ -65,19 +62,36 @@ def loginUser(request):
             if authenticated_user:
                 login(request,authenticated_user)
                 messages.success(request,"user logged sucessfully")
-                if authenticated_user.profile.role=="employee":
-                    return redirect("/employee/dashboard")
-                if authenticated_user.profile.role=="employer":
-                    return redirect("/employer/dashboard")
-                return redirect("/")
+               
+                return redirect("/dashboard")
             else:
                 return render(request,"pages/auth/login.html",{"errors":{"password":"Invalid password"}})
         else:
             
             return render (request,"pages/auth/login.html",{"errors":{"userName":"invalid user"}})
-        
-def employerDashboard(request):
-    return render(request,'pages/employer/dashboard.html')
+@login_required(login_url="/login")        
+def dashboard(request):
+    role=request.user.profile.role
+    if role=="employee":
+        return redirect("/employee/dashboard")
+    elif role=="employer":
+        return redirect("/employer/dashboard")
+    else:
+        return redirect("/login")
 
+@login_required(login_url="/login")        
+def employerDashboard(request):
+    role=request.user.profile.role
+    if role =="employer":
+        return render(request,'pages/employer/dashboard.html')
+    else:
+        return redirect('employee/dashboard')
+
+
+@login_required(login_url="/login")        
 def employeeDashboard(request):
-    return render(request,'pages/employee/dashboard.html')
+    role=request.user.profile.role
+    if role =="employee":
+        return render(request,'pages/employee/dashboard.html')
+    else:
+            return redirect('/employer/dashboard')

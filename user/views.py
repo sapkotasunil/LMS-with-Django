@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import logout,authenticate,login
 from django.contrib import messages
+from django.contrib.auth.models import User
 
 def profilePage(request):
     return render(request,'pages/profile.html')
@@ -21,17 +22,17 @@ def update_edit(request):
         last_name= request.POST.get("last_name")
         password= request.POST.get("password")
         confirm_password= request.POST.get("confirm_password")
-        image= request.POST.get("image")
+        image= request.FILES.get("image")
         phone= request.POST.get("phone")
         dob= request.POST.get("dob")
         gender= request.POST.get("gender")
         adress= request.POST.get("adress")
         
-        if  confirm_password == password:
-            errors["password"] = "Passwords do not match"
+        if password and password == confirm_password:
+            errors={"password":"password doesn't match"}
        
-        if phone and len(phone) != 10:
-             errors["phone"] = "Phone number must be 10 digits"
+        if len(phone)!=10:
+            errors={"phone":"number must be 10 digit"}
             
            
         if errors:
