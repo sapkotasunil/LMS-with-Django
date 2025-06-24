@@ -25,12 +25,18 @@ from projects.views import *
 employerUrlPattern=[
     path ('dashboard',employerDashboard),
     path('projects',employerProjects),
-    path("register_project",register_project)
+    path("register_project",register_project_page),
+    path("create_project",createProject),
+    path("project_details/<int:id>",employerProjectDetails),
+    path("edit_project/<int:id>", editProjectDetailsPage),
+    path("update_project/<int:id>",editProjectDetails)
 ]
 
 employeeUrlPattern=[
     path("dashboard",employeeDashboard),
-    path('projects',employeeProjects)
+    path('projects',employeeProjects),
+    path("project_details/<int:id>",employeeProjectDetails)
+    
 ]
 
 urlpatterns = [
@@ -48,7 +54,7 @@ urlpatterns = [
     path('edit',editUser),
     path('update_edit',update_edit),
     path('dashboard',dashboard),
-    path("project",projects)
+    path("projects",projects)
 ] 
 
 # To acess photos from local device and also change in setting
