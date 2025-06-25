@@ -2,7 +2,7 @@ from django.shortcuts import get_list_or_404, get_object_or_404, redirect, rende
 from django.contrib.auth.decorators import login_required
 from .models import *
 from django.contrib import messages
-
+from tasks.models import Task
 
 
 @login_required(login_url="/login")
@@ -45,9 +45,9 @@ def createProject(request):
     
     if user.profile.role=="employer":
         if len(title)<3:
-            errors={"title":"Title length should be 3 characters"}
+            errors["title"]= "Title length should be more than 3 characters."
         if description != "" and len(description)<10:
-            errors={"description":"Description length should be 3 characters"}
+            errors["description"]= "Description length should be more than 10 characters."
         if errors:
             return render(request,"pages/employer/project/register_project.html",{"errors":errors})
         
@@ -65,8 +65,9 @@ def employerProjectDetails(request,id):
 @login_required(login_url="/login") 
 def editProjectDetailsPage( request,id):
     project=get_object_or_404(Project,pk=id)
+    tasks=Task.objects.filter(project=project)
     if request.user.profile.role== 'employer':
-        return render (request,"pages/employer/project/edit_project.html",{"project":project})
+        return render (request,"pages/employer/project/edit_project.html",{"project":project,'tasks':tasks })
     else:
         return redirect('/employee/projects')
 
@@ -87,9 +88,9 @@ def editProjectDetails(request,id):
         status=request.POST.get('status')
         if request.user.profile.role=="employer":
             if len(title)<3:
-                errors={"title":"Title length should be 3 characters"}
+                errors["title"]= "Title length should be more than 3 characters."
             if description != "" and len(description)<10:
-                errors={"description":"Description length should be 3 characters"}
+                errors["description"]= "Description length should be more than 10 characters."
             if errors:
                  return render(request,"pages/employer/project/register_project.html",{"errors":errors})
             project.title=title
@@ -98,5 +99,11 @@ def editProjectDetails(request,id):
             project.save()
             messages.success(request,"project update sucessfully")
             return redirect(f"/employer/project_details/{id}") 
-        
-        
+@login_required(login_url="/login")       
+def deleteProject(request,id):
+    if request.user.profile.role=="employer":
+        project=get_object_or_404(Project, pk=id)
+        project.delete()
+        messages.success(request,"project deleted sucessfully")
+        return redirect('/employer/projects')
+            

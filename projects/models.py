@@ -15,3 +15,5 @@ class Project(models.Model):
     status=models.CharField(choices=StatusOption,default=StatusOption.PENDING)
     update_at=models.DateTimeField( auto_now=True, null=True, blank=True,editable=False)
     
+    def __str__(self):
+        return self.title

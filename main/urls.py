@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 from user.views import *
 from .views import * #to import all function default otherwise we use : from .views import index,loginPage,registerPage
 from projects.views import *
+from tasks.views import *
 
 employerUrlPattern=[
     path ('dashboard',employerDashboard),
@@ -29,7 +30,10 @@ employerUrlPattern=[
     path("create_project",createProject),
     path("project_details/<int:id>",employerProjectDetails),
     path("edit_project/<int:id>", editProjectDetailsPage),
-    path("update_project/<int:id>",editProjectDetails)
+    path("update_project/<int:id>",editProjectDetails),
+    path('delete_project/<int:id>',deleteProject),
+    path('project/<int:id>/register_tasks/',registerTaskPage),
+    path('create-task', createTask),
 ]
 
 employeeUrlPattern=[
