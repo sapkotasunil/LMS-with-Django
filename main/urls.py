@@ -34,12 +34,16 @@ employerUrlPattern=[
     path('delete_project/<int:id>',deleteProject),
     path('project/<int:id>/register_tasks/',registerTaskPage),
     path('create-task', createTask),
+    path('task/<int:id>',taskDetails)
+   
 ]
 
 employeeUrlPattern=[
     path("dashboard",employeeDashboard),
     path('projects',employeeProjects),
-    path("project_details/<int:id>",employeeProjectDetails)
+    path("project_details/<int:id>",employeeProjectDetails),
+    path('task/<int:id>',taskDetails)
+    
     
 ]
 

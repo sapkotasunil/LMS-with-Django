@@ -59,15 +59,16 @@ def createProject(request):
 @login_required(login_url="/login")            
 def employerProjectDetails(request,id):
     project=Project.objects.get(id=id)
-    return render(request,"pages/employer/project/project_details.html",{"project":project})   
+    tasks=Task.objects.filter(project=project)
+    
+    return render(request,"pages/employer/project/project_details.html",{"project":project,'tasks':tasks})   
          
          
 @login_required(login_url="/login") 
 def editProjectDetailsPage( request,id):
     project=get_object_or_404(Project,pk=id)
-    tasks=Task.objects.filter(project=project)
     if request.user.profile.role== 'employer':
-        return render (request,"pages/employer/project/edit_project.html",{"project":project,'tasks':tasks })
+        return render (request,"pages/employer/project/edit_project.html",{"project":project })
     else:
         return redirect('/employee/projects')
 
