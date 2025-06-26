@@ -45,7 +45,9 @@ employeeUrlPattern=[
     path("dashboard",employeeDashboard),
     path('projects',employeeProjects),
     path("project_details/<int:id>",employeeProjectDetails),
-    path('task/<int:id>',taskDetails)
+    path('task/<int:id>',taskDetails),
+    path("project-details/<int:id>/", employeeProjectDetails),
+    path("task/<int:id>/", taskDetails),
     
     
 ]
