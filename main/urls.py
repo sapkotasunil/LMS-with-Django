@@ -34,7 +34,10 @@ employerUrlPattern=[
     path('delete_project/<int:id>',deleteProject),
     path('project/<int:id>/register_tasks/',registerTaskPage),
     path('create-task', createTask),
-    path('task/<int:id>',taskDetails)
+    path('task/<int:id>',taskDetails),
+    path('edit-task/<int:id>',editTaskPage),
+    path('update-task/<int:id>',updateTask),
+    path('delete-task/<int:project_id>/<int:id>', deleteTask)
    
 ]
 
