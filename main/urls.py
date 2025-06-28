@@ -48,6 +48,7 @@ employeeUrlPattern=[
     path('task/<int:id>',taskDetails),
     path("project-details/<int:id>/", employeeProjectDetails),
     path("task/<int:id>/", taskDetails),
+    path("submit-task/<int:id>",submitTask)
     
     
 ]

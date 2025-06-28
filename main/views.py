@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-
+from tasks.models import Task
 def index(request):
     return render(request,"pages/index.html")
 
@@ -83,7 +83,10 @@ def dashboard(request):
 def employerDashboard(request):
     role=request.user.profile.role
     if role =="employer":
-        return render(request,'pages/employer/dashboard.html')
+        pendingTasks=Task.objects.filter(status="Pending",user=request.user)
+        completedTasks=Task.objects.filter(status="Completed",user=request.user)
+        InprogressTasks=Task.objects.filter(status="In Progress",user=request.user)
+        return render(request,'pages/employer/dashboard.html',{'pendingTasks':pendingTasks, "completedTasks":completedTasks, "inProgressTasks":InprogressTasks})
     else:
         return redirect('employee/dashboard')
 
