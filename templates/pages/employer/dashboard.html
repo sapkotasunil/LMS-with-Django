@@ -8,7 +8,8 @@
     </div>
     <div class="rounded-lg">
       {% for task in pendingTasks %}
-      <div
+      <a
+        href="/employer/task/{{task.id}}"
         class="grid grid-cols-3 gap-2 rounded-md text-center text-lg font-semibold px-4 text-gray-900 py-1 border-b-2 border-white bg-gray-200 hover:bg-gray-300 hover:scale-[101%] duration-300"
       >
         <div class="">{{ task.title }}</div>
@@ -18,7 +19,7 @@
         >
           {{task.priority}}
         </div>
-      </div>
+      </a>
       {% endfor %}
     </div>
   </div>
@@ -30,7 +31,8 @@
     </div>
     <div class="rounded-lg">
       {% for task in inProgressTasks %}
-      <div
+      <a
+        href="/employer/task/{{task.id}}"
         class="grid grid-cols-3 gap-2 rounded-md text-center text-lg font-semibold px-4 text-gray-900 py-1 border-b-2 border-white bg-gray-200 hover:bg-gray-300 hover:scale-[101%] duration-300"
       >
         <div class="">{{ task.title }}</div>
@@ -40,7 +42,7 @@
         >
           {{task.priority}}
         </div>
-      </div>
+      </a>
       {% endfor %}
     </div>
   </div>
@@ -52,7 +54,8 @@
     </div>
     <div class="rounded-lg">
       {% for task in completedTasks %}
-      <div
+      <a
+        href="/employer/task/{{task.id}}"
         class="grid grid-cols-3 gap-2 rounded-md text-center text-lg font-semibold px-4 text-gray-900 py-1 border-b-2 border-white bg-gray-200 hover:bg-gray-300 hover:scale-[101%] duration-300"
       >
         <div class="">{{ task.title }}</div>
@@ -62,7 +65,7 @@
         >
           {{task.priority}}
         </div>
-      </div>
+      </a>
       {% endfor %}
     </div>
   </div>

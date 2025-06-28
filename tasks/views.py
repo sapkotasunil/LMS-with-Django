@@ -60,7 +60,7 @@ def taskDetails(request, id):
     role = request.user.profile.role
     task = Task.objects.get(pk=id)
     if role == "employer":
-        return render(request, "pages/employer/project/task/task_details.html",{"task":task})
+        return render(request, "pages/employer/project/tasks/task_details.html",{"task":task})
     elif role == "employee":
         return render(request, "pages/employee/project/task/task_details.html",{"task":task})
     else:
@@ -70,7 +70,7 @@ def taskDetails(request, id):
 def editTaskPage(request, id):
     task = Task.objects.get(pk=id)
     if request.user.profile.role == "employer":
-        return render(request, "pages/employer/project/task/edit_task.html", {"task": task})
+        return render(request, "pages/employer/project/tasks/edit_task.html", {"task": task})
     else:
         return redirect("/")
     

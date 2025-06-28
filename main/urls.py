@@ -37,7 +37,8 @@ employerUrlPattern=[
     path('task/<int:id>',taskDetails),
     path('edit-task/<int:id>',editTaskPage),
     path('update-task/<int:id>',updateTask),
-    path('delete-task/<int:project_id>/<int:id>', deleteTask)
+    path('delete-task/<int:project_id>/<int:id>', deleteTask),
+    path('tasks/',employerTasks)
    
 ]
 
@@ -48,7 +49,9 @@ employeeUrlPattern=[
     path('task/<int:id>',taskDetails),
     path("project-details/<int:id>/", employeeProjectDetails),
     path("task/<int:id>/", taskDetails),
-    path("submit-task/<int:id>",submitTask)
+    path("submit-task/<int:id>",submitTask),
+    path('tasks/',employeeTasks)
+    
     
     
 ]
@@ -68,7 +71,8 @@ urlpatterns = [
     path('edit',editUser),
     path('update_edit',update_edit),
     path('dashboard',dashboard),
-    path("projects",projects)
+    path("projects",projects),
+    path("tasks/",tasks)
 ] 
 
 # To acess photos from local device and also change in setting

@@ -59,14 +59,14 @@
         <!-- Username Field -->
         <div class="space-y-2">
           <label
-            for="userName"
+            for="username"
             class="block text-sm font-semibold text-gray-700"
             >Username</label
           >
           <input
             type="text"
             id="userName"
-            name="userName"
+            name="username"
             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-gray-50 focus:bg-white"
             placeholder="Choose a username"
             required
@@ -104,7 +104,7 @@
             id="adress"
             name="adress"
             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 bg-gray-50 focus:bg-white"
-            placeholder="Enter your Address"
+            placeholder="Enter your address"
             required
           />
           {% if errors and errors.adress %}
@@ -185,9 +185,11 @@
             placeholder="Create a strong password"
             required
           />
-          {% if errors and errors.password %}
-          <span class="text-red-500">{{ errors.password }}</span>
-          {% endif %}
+          {% if errors and errors.password %} {% for error in errors.password %}
+
+          <span class="text-red-500">{{ error }}</span>
+
+          {% endfor %} {% endif %}
         </div>
 
         <!-- Confirm Password Field -->
@@ -205,9 +207,11 @@
             placeholder="Confirm your password"
             required
           />
-          {% if errors %}
-          <span class="text-red-500">{{ errors.password }}</span>
-          {% endif %}
+          {% if errors %} {% for error in errors.confirm_password %}
+
+          <span class="text-red-500">{{ error }}</span>
+
+          {% endfor %} {% endif %}
         </div>
 
         <!-- Image Field -->
