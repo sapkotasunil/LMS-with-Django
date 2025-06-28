@@ -72,7 +72,7 @@ urlpatterns = [
     path('update_edit',update_edit),
     path('dashboard',dashboard),
     path("projects",projects),
-    path("tasks/",tasks)
+    path("tasks/",tasks),
 ] 
 
 # To acess photos from local device and also change in setting
